@@ -16,6 +16,10 @@ closeBtn.addEventListener('click', () => {
     openBtn.classList.remove('modal_hidden');
 })
 
+const bestScoreDisplay = document.querySelector('#best_score_display');
+let bestScore = localStorage.getItem('personal_best') || 0;
+bestScoreDisplay.textContent = bestScore;
+
 let score = 0;
 const clicker = document.getElementById('click_button');
 const scoreDisplay = document.getElementById('score_display');
@@ -64,6 +68,11 @@ startBtn.addEventListener('click', () => {
                 console.log('Prepared data to send:', post_data);
                 saveScore(post_data);
             }
+            if(score>bestScore){
+                bestScore = score;
+                localStorage.setItem('personal_best', bestScore);
+                bestScoreDisplay.textContent = bestScore;
+            }
             clicker.disabled=true;
             startBtn.disabled=false;
             startBtn.textContent="RESTART";
@@ -71,7 +80,6 @@ startBtn.addEventListener('click', () => {
         timeDisplay.textContent = Math.max(0, timeLeft).toFixed(2);
     }, 20);
 })
-
 
 
 async function fetchLeaderboard(){
