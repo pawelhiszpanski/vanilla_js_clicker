@@ -94,7 +94,17 @@ async function fetchLeaderboard(){
         leaderList.innerHTML = '';      // clearing old view
         data.forEach((user) => {
             const listItem = document.createElement('li');
-            listItem.textContent = `${user.name} --> ${user.score} points`;
+
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = user.name;
+            nameSpan.classList.add('player_name');
+
+            const scoreSpan = document.createElement('span');
+            scoreSpan.textContent = `${user.score} points`;
+            scoreSpan.classList.add('player_score');
+
+            listItem.appendChild(nameSpan);
+            listItem.appendChild(scoreSpan);
             leaderList.appendChild(listItem);
         })
     }
