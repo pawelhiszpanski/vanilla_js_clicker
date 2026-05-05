@@ -41,4 +41,4 @@ def save_leaderboard():
 
 if __name__ == '__main__':
     print("Server started")
-    app.run(port=5000, debug=True)
+    app.run(port=5001, debug=True)
