@@ -46,10 +46,10 @@ startBtn.addEventListener('click', () => {
     timeDisplay.textContent = timeLeft.toFixed(2);
 
     startBtn.disabled = true;
-    clicker.disabled=false;
+    clicker.disabled = false;
     startBtn.textContent = "START GAME";
 
-    timer = setInterval(() => {
+    timer = setInterval( () => {
         timeLeft-=0.02;
 
         let timePassed = GAME_TIME-timeLeft;
@@ -84,7 +84,7 @@ startBtn.addEventListener('click', () => {
 
 async function fetchLeaderboard(){
     try{
-        const response = await fetch('https://jsonplaceholder.typicode.com/users');
+        const response = await fetch('http://127.0.0.1:5000/scores');
         if(!response.ok){
             throw new Error('Server Error' + response.status);
         }
@@ -94,7 +94,7 @@ async function fetchLeaderboard(){
         leaderList.innerHTML = '';      // clearing old view
         data.forEach((user) => {
             const listItem = document.createElement('li');
-            listItem.textContent = user.username;
+            listItem.textContent = `${user.name} --> ${user.score} points`;
             leaderList.appendChild(listItem);
         })
     }
@@ -111,7 +111,7 @@ async function saveScore(scoreData){
             body: JSON.stringify(scoreData)
         };
 
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts', post_options);
+        const response = await fetch('http://127.0.0.1:5000/scores', post_options);
         if(!response.ok){
             throw new Error('Server Error' + response.status);
         }
