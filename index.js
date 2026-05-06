@@ -84,7 +84,8 @@ startBtn.addEventListener('click', () => {
 
 async function fetchLeaderboard(){
     try{
-        const response = await fetch('http://127.0.0.1:5001/scores');
+        //const response = await fetch('http://127.0.0.1:5001/scores');         // => using python server
+        const response = await fetch('http://127.0.0.1:3000/scores');   // => using node.js server
         if(!response.ok){
             throw new Error('Server Error' + response.status);
         }
@@ -121,7 +122,8 @@ async function saveScore(scoreData){
             body: JSON.stringify(scoreData)
         };
 
-        const response = await fetch('http://127.0.0.1:5001/scores', post_options);
+        //const response = await fetch('http://127.0.0.1:5001/scores', post_options);       // => using python server
+        const response = await fetch('http://127.0.0.1:3000/scores', post_options);     // => using node.js server
         if(!response.ok){
             throw new Error('Server Error' + response.status);
         }
