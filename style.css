@@ -195,3 +195,18 @@ body {
     font-weight: bold;
     color: #3498db  ;
 }
+
+#press_text {
+    display: inline-block;      /*to use countdown*/
+}
+
+@keyframes countdown {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}

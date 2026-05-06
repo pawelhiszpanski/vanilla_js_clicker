@@ -46,40 +46,70 @@ startBtn.addEventListener('click', () => {
     timeDisplay.textContent = timeLeft.toFixed(2);
 
     startBtn.disabled = true;
-    clicker.disabled = false;
-    startBtn.textContent = "START GAME";
+    startBtn.textContent = "GET READY...";
+    clicker.disabled = true;
 
-    timer = setInterval( () => {
-        timeLeft-=0.02;
+    let countdown = 3;
+    const pressText = document.getElementById('press_text');
+    pressText.textContent = countdown;
 
-        let timePassed = GAME_TIME-timeLeft;
-        if(timePassed > 0){
-            cpsDisplay.textContent = (score/timePassed).toFixed(2);
-        }
+    const triggerAnimation = () => {
+        pressText.style.animation = 'none';
+        void pressText.offsetWidth;             // refreshing page
+        pressText.style.animation = 'countdown 1s ease-out';
+    };
 
-        if(timeLeft <= 0){
-            clearInterval(timer);
-            const playerName = prompt('Type your name:');
-            if(playerName){
-                const post_data = {
-                    name: playerName,
-                    score: score
+    triggerAnimation();
+
+    const countdownInterval = setInterval(() => {
+        countdown--;
+
+        if (countdown > 0) {
+            // countdown
+            pressText.textContent = countdown;
+            triggerAnimation();
+        } else {
+            // end of countdown
+            clearInterval(countdownInterval);
+            startBtn.textContent = "RESTART";
+
+            pressText.textContent = "CLICK";
+            pressText.style.animation = 'none';
+            clicker.disabled = false;
+
+            timer = setInterval( () => {
+                timeLeft-=0.02;
+
+                let timePassed = GAME_TIME-timeLeft;
+                if(timePassed > 0){
+                    cpsDisplay.textContent = (score/timePassed).toFixed(2);
                 }
-                console.log('Prepared data to send:', post_data);
-                saveScore(post_data);
-            }
-            if(score>bestScore){
-                bestScore = score;
-                localStorage.setItem('personal_best', bestScore);
-                bestScoreDisplay.textContent = bestScore;
-            }
-            clicker.disabled=true;
-            startBtn.disabled=false;
-            startBtn.textContent="RESTART";
+
+                if(timeLeft <= 0){
+                    clearInterval(timer);
+                    const playerName = prompt('Type your name:');
+                    if(playerName){
+                        const post_data = {
+                            name: playerName,
+                            score: score
+                        }
+                        console.log('Prepared data to send:', post_data);
+                        saveScore(post_data);
+                    }
+                    if(score>bestScore){
+                        bestScore = score;
+                        localStorage.setItem('personal_best', bestScore);
+                        bestScoreDisplay.textContent = bestScore;
+                    }
+                    clicker.disabled=true;
+                    startBtn.disabled=false;
+                    startBtn.textContent="RESTART";
+                }
+                timeDisplay.textContent = Math.max(0, timeLeft).toFixed(2);
+            }, 20);
         }
-        timeDisplay.textContent = Math.max(0, timeLeft).toFixed(2);
-    }, 20);
-})
+    }, 1000);
+});
 
 
 async function fetchLeaderboard(){
