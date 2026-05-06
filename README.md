@@ -1,47 +1,28 @@
-# 🚀 Simple CPS Clicker with Python Backend
+# 🚀 Simple CPS Clicker (Node.js Edition)
 
-A full-stack web application designed to test your clicking speed (Clicks Per Second). The project features a modern, responsive frontend and a custom Python-based backend to manage the global leaderboard.
+A fast-paced web game to test your Clicks Per Second (CPS), powered by a lightweight Node.js backend. 
 
 ## 🛠 Tech Stack
+* **Frontend:** HTML5, CSS3 (Animations, Flexbox), Vanilla JavaScript
+* **Backend:** Node.js, Express, CORS
+* **Database:** Local `scores.json` file
 
-* **Frontend:** HTML5, CSS3 (Flexbox, Modal windows), Vanilla JavaScript (ES6+).
-* **Backend:** Python 3, Flask framework, Flask-CORS.
-* **Database:** JSON-based persistent storage.
+## 🌟 Key Features
+* **Countdown Timer:** A built-in 3-second animated countdown before the game starts.
+* **Real-time CPS Tracking:** See your clicking speed update live.
+* **Global Leaderboard:** The top 10 scores are saved on the Node.js server and displayed globally.
+* **Personal Best:** Your highest score is saved locally in your browser's storage.
 
-## 🌟 Features
+## 🚀 How to Run
 
-* **Real-time CPS Calculation:** Track your speed as you click.
-* **Personal Best:** Saves your highest score in the browser's localStorage.
-* **Global Leaderboard:** Syncs your results with a Python server to see the Top 10 players.
-* **Persistent Storage:** Scores are saved in a `scores.json` file on the server.
-* **Responsive Design:** Clean and simple UI that works on various screen sizes.
+### 1. Install dependencies
+Open your terminal in the project folder and run:
+`npm install`
 
-## 🚀 Getting Started
+### 2. Start the server
+Launch the backend server by running:
+`npm start`
+*(The server will run on http://localhost:3000)*
 
-### 1. Prerequisites
-Make sure you have **Python 3** installed on your machine.
-
-### 2. Installation
-Clone this repository or download the source code, then install the required Python packages:
-`pip install flask flask-cors`
-
-### 3. Running the Application
-
-1. **Start the Backend Server:**
-   Navigate to the project folder and run:
-   `python server.py`
-   The server will start on `http://127.0.0.1:5001`.
-
-2. **Launch the Frontend:**
-   Open `index.html` in your favorite web browser.
-
-## 📁 Project Structure
-
-* `index.html` - The main structure of the game.
-* `style.css` - Visual styling and layout.
-* `index.js` - Game logic and communication with the API.
-* `server.py` - Flask server handling GET and POST requests.
-* `scores.json` - Data file where the leaderboard is stored.
-
-## 📝 License
-This project is open-source and available under the MIT License.
+### 3. Play the game
+Open the `index.html` file in any web browser, click "Start Game", and click as fast as you can!
