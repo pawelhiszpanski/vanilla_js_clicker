@@ -1,47 +1,38 @@
-# 🚀 Simple CPS Clicker with Python Backend
+# 🚀 Simple CPS Clicker (Dual Backend Project)
 
-A full-stack web application designed to test your clicking speed (Clicks Per Second). The project features a modern, responsive frontend and a custom Python-based backend to manage the global leaderboard.
+A fast-paced web game to test your Clicks Per Second (CPS). This project was created for educational purposes to learn and compare backend development. It features the exact same server logic implemented in two different environments: Python and Node.js.
 
 ## 🛠 Tech Stack
+* **Frontend:** HTML5, CSS3 (Animations, Flexbox), Vanilla JavaScript
+* **Backend 1 (Node.js):** Node.js, Express, CORS
+* **Backend 2 (Python):** Python 3, Flask, Flask-CORS
+* **Database:** Local `scores.json` file (shared between both servers)
 
-* **Frontend:** HTML5, CSS3 (Flexbox, Modal windows), Vanilla JavaScript (ES6+).
-* **Backend:** Python 3, Flask framework, Flask-CORS.
-* **Database:** JSON-based persistent storage.
+## 🌟 Key Features
+* **Dual Backend Learning:** Run the server using either Python or Node.js - the frontend works identically with both!
+* **Countdown Timer:** A built-in 3-second animated countdown before the game starts.
+* **Real-time CPS Tracking:** See your clicking speed update live.
+* **Global Leaderboard:** The top 10 scores are saved on the server and displayed globally.
+* **Personal Best:** Your highest score is saved locally in your browser's storage.
 
-## 🌟 Features
+## 🚀 How to Run
 
-* **Real-time CPS Calculation:** Track your speed as you click.
-* **Personal Best:** Saves your highest score in the browser's localStorage.
-* **Global Leaderboard:** Syncs your results with a Python server to see the Top 10 players.
-* **Persistent Storage:** Scores are saved in a `scores.json` file on the server.
-* **Responsive Design:** Clean and simple UI that works on various screen sizes.
+You can choose to run either the Node.js server OR the Python server. 
 
-## 🚀 Getting Started
+### Option A: Running the Node.js Server
+1. Install dependencies:
+   `npm install`
+2. Start the server:
+   `npm start`
+   *(Runs on http://localhost:3000)*
 
-### 1. Prerequisites
-Make sure you have **Python 3** installed on your machine.
-
-### 2. Installation
-Clone this repository or download the source code, then install the required Python packages:
-`pip install flask flask-cors`
-
-### 3. Running the Application
-
-1. **Start the Backend Server:**
-   Navigate to the project folder and run:
+### Option B: Running the Python Server
+1. Install dependencies:
+   `pip install flask flask-cors`
+2. Start the server:
    `python server.py`
-   The server will start on `http://127.0.0.1:5001`.
+   *(Runs on http://127.0.0.1:5001 or your configured port)*
 
-2. **Launch the Frontend:**
-   Open `index.html` in your favorite web browser.
-
-## 📁 Project Structure
-
-* `index.html` - The main structure of the game.
-* `style.css` - Visual styling and layout.
-* `index.js` - Game logic and communication with the API.
-* `server.py` - Flask server handling GET and POST requests.
-* `scores.json` - Data file where the leaderboard is stored.
-
-## 📝 License
-This project is open-source and available under the MIT License.
+### Playing the Game
+Once your chosen server is running, open the `index.html` file in any web browser, click "Start Game", and click as fast as you can! 
+*(Note: Make sure the `fetch` URLs in your `index.js` point to the correct port depending on which server you started).*
