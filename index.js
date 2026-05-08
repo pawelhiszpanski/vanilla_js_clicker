@@ -87,20 +87,9 @@ startBtn.addEventListener('click', () => {
 
                 if(timeLeft <= 0){
                     clearInterval(timer);
-                    const playerName = prompt('Type your name:');
-                    if(playerName){
-                        const post_data = {
-                            name: playerName,
-                            score: score
-                        }
-                        console.log('Prepared data to send:', post_data);
-                        saveScore(post_data);
-                    }
-                    if(score>bestScore){
-                        bestScore = score;
-                        localStorage.setItem('personal_best', bestScore);
-                        bestScoreDisplay.textContent = bestScore;
-                    }
+                    //const playerName = prompt('Type your name:');
+                    nameModal.classList.remove('hidden');
+
                     clicker.disabled=true;
                     startBtn.disabled=false;
                     startBtn.textContent="RESTART";
@@ -111,11 +100,48 @@ startBtn.addEventListener('click', () => {
     }, 1000);
 });
 
+const nameModal = document.getElementById('name_modal');
+const nameValue = document.getElementById('player_name_input');
+const saveScoreBtn = document.getElementById('save_score_btn');
+const closeScoreBtn = document.getElementById('close_score_btn');
+
+saveScoreBtn.addEventListener('click', () => {
+    const playerName = nameValue.value.trim();
+
+    if(playerName){
+        const post_data = {
+            name: playerName,
+            score: score
+        }
+        console.log('Prepared data to send:', post_data);
+        saveScore(post_data);
+    }
+
+    if(score > bestScore){
+        bestScore = score;
+        localStorage.setItem('personal_best', bestScore);
+        bestScoreDisplay.textContent = bestScore;
+    }
+
+    nameModal.classList.add('hidden');
+    nameValue.value = '';
+    scoreDisplay.textContent = '0';
+    cpsDisplay.textContent = '0.00';
+});
+
+// Zamykanie panelu bez zapisu
+closeScoreBtn.addEventListener('click', () => {
+    nameModal.classList.add('hidden');
+    nameValue.value = '';
+    scoreDisplay.textContent = '0';
+    cpsDisplay.textContent = '0.00';
+});
+
 
 async function fetchLeaderboard(){
     try{
-        //const response = await fetch('http://127.0.0.1:5001/scores');         // => using python server
-        const response = await fetch('http://127.0.0.1:3000/scores');   // => using node.js server
+        const response = await fetch('http://127.0.0.1:5001/scores');         // => using python server
+        //const response = await fetch('http://127.0.0.1:3000/scores');   // => using node.js server
         if(!response.ok){
             throw new Error('Server Error' + response.status);
         }
@@ -152,8 +178,8 @@ async function saveScore(scoreData){
             body: JSON.stringify(scoreData)
         };
 
-        //const response = await fetch('http://127.0.0.1:5001/scores', post_options);       // => using python server
-        const response = await fetch('http://127.0.0.1:3000/scores', post_options);     // => using node.js server
+        const response = await fetch('http://127.0.0.1:5001/scores', post_options);       // => using python server
+        //const response = await fetch('http://127.0.0.1:3000/scores', post_options);     // => using node.js server
         if(!response.ok){
             throw new Error('Server Error' + response.status);
         }

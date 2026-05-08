@@ -32,7 +32,17 @@ def get_leaderboard():
 def save_leaderboard():
     new_score = request.json
     scores = get_scores()
-    scores.append(new_score)
+    player_found = False
+    for tmp in scores:
+        if tmp['name'] == new_score['name']:
+            player_found = True
+            if tmp['score']< new_score['score']:
+                tmp['score'] = new_score['score']
+            break
+
+    if not player_found:
+        scores.append(new_score)
+
     with open(FILE_NAME, 'w', encoding='utf-8') as file:
         json.dump(scores, file)
 
