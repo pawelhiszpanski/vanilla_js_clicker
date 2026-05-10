@@ -41,4 +41,4 @@ The project uses a relational schema for efficiency:
 | :--- | :--- | :--- |
 | id | INTEGER | Primary Key (Auto-incremented) |
 | name | TEXT | Player display name (Unique index) |
-| score | REAL | Highest CPS achieved |
+| score | REAL | Highest score achieved |
