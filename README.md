@@ -1,38 +1,44 @@
-# 🚀 Simple CPS Clicker (Dual Backend Project)
+# 🚀 Professional CPS Clicker (Dual-Stack & SQL)
 
-A fast-paced web game to test your Clicks Per Second (CPS). This project was created for educational purposes to learn and compare backend development. It features the exact same server logic implemented in two different environments: Python and Node.js.
+A high-performance web application designed to test Clicks Per Second (CPS), featuring a robust architecture with interchangeable backends and persistent storage.
 
-## 🛠 Tech Stack
-* **Frontend:** HTML5, CSS3 (Animations, Flexbox), Vanilla JavaScript
-* **Backend 1 (Node.js):** Node.js, Express, CORS
-* **Backend 2 (Python):** Python 3, Flask, Flask-CORS
-* **Database:** Local `scores.json` file (shared between both servers)
+## 🛠️ Tech Stack
+* **Frontend:** HTML5, CSS3 (Modern Flexbox, UI/UX Animations), Vanilla JavaScript.
+* **Backend A (Node.js):** Express.js framework with asynchronous SQLite integration.
+* **Backend B (Python):** Flask framework with native SQLite3 management.
+* **Database:** SQLite (Relational database for high-integrity score tracking).
 
-## 🌟 Key Features
-* **Dual Backend Learning:** Run the server using either Python or Node.js - the frontend works identically with both!
-* **Countdown Timer:** A built-in 3-second animated countdown before the game starts.
-* **Real-time CPS Tracking:** See your clicking speed update live.
-* **Global Leaderboard:** The top 10 scores are saved on the server and displayed globally.
-* **Personal Best:** Your highest score is saved locally in your browser's storage.
+## 🌟 Advanced Features
+* **Dual-Backend Compatibility:** Both servers share the exact same `database.db` file. You can switch between Node.js and Python without losing data.
+* **Anti-Cheat System:** Server-side validation for name length, empty inputs, and "non-human" CPS scores (>30 CPS).
+* **Real-Time Accuracy:** Timer logic based on system clock (`Date.now()`) to prevent lag when switching browser tabs.
+* **Dynamic Leaderboard:** Top 10 scores are fetched and displayed using optimized SQL queries (`ORDER BY score DESC`).
+* **Smart Record System:** The database automatically detects existing players and only updates their score if they beat their personal best.
+* **UI/UX Improvements:**
+    * **Dark Mode:** Toggleable theme saved in `localStorage`.
+    * **In-App Modal:** Modern name entry panel (replaces the browser's native `prompt`).
+    * **Countdown:** 3-second animated start sequence.
 
-## 🚀 How to Run
+## 🚀 Installation & Setup
 
-You can choose to run either the Node.js server OR the Python server. 
+### 1. Database Initialization
+The database file `database.db` is automatically created by either server upon its first run.
 
-### Option A: Running the Node.js Server
-1. Install dependencies:
-   `npm install`
-2. Start the server:
-   `npm start`
-   *(Runs on http://localhost:3000)*
+### 2. Option A: Running the Node.js Server
+* Install dependencies: `npm install express cors sqlite3`
+* Start the server: `node server.js` (Runs on http://localhost:3000)
 
-### Option B: Running the Python Server
-1. Install dependencies:
-   `pip install flask flask-cors`
-2. Start the server:
-   `python server.py`
-   *(Runs on http://127.0.0.1:5001 or your configured port)*
+### 3. Option B: Running the Python Server
+* Install dependencies: `pip install flask flask-cors`
+* Start the server: `python server.py` (Runs on http://localhost:5001)
 
-### Playing the Game
-Once your chosen server is running, open the `index.html` file in any web browser, click "Start Game", and click as fast as you can! 
-*(Note: Make sure the `fetch` URLs in your `index.js` point to the correct port depending on which server you started).*
+### 4. Client Configuration
+Ensure the `fetch()` URLs in your `index.js` point to the correct port (3000 for Node, 5001 for Python).
+
+## 📊 Database Schema
+The project uses a relational schema for efficiency:
+| Column | Type | Description |
+| :--- | :--- | :--- |
+| id | INTEGER | Primary Key (Auto-incremented) |
+| name | TEXT | Player display name (Unique index) |
+| score | REAL | Highest CPS achieved |
