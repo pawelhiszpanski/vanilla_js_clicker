@@ -129,12 +129,27 @@ saveScoreBtn.addEventListener('click', () => {
     cpsDisplay.textContent = '0.00';
 });
 
-// Zamykanie panelu bez zapisu
 closeScoreBtn.addEventListener('click', () => {
     nameModal.classList.add('hidden');
     nameValue.value = '';
     scoreDisplay.textContent = '0';
     cpsDisplay.textContent = '0.00';
+});
+
+const themeToggleBtn = document.getElementById('theme_toggle');
+
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+}
+
+themeToggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+
+    if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
 });
 
 
