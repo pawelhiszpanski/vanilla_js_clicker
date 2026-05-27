@@ -10,7 +10,7 @@ A high-performance web application designed to test Clicks Per Second (CPS), fea
 
 ## 🌟 Advanced Features
 * **Dual-Backend Compatibility:** Both servers share the exact same `database.db` file. You can switch between Node.js and Python without losing data.
-* **Anti-Cheat System:** Server-side validation for name length, empty inputs, and "non-human" CPS scores (>30 CPS).
+* **Anti-Cheat System:** Server-side validation for name length, empty inputs.
 * **Real-Time Accuracy:** Timer logic based on system clock (`Date.now()`) to prevent lag when switching browser tabs.
 * **Dynamic Leaderboard:** Top 10 scores are fetched and displayed using optimized SQL queries (`ORDER BY score DESC`).
 * **Smart Record System:** The database automatically detects existing players and only updates their score if they beat their personal best.
